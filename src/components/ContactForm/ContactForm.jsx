@@ -42,6 +42,7 @@ const ContactForm = () => {
     }
 
     dispatch(addContact({ name, telephone }));
+
     setName('');
     setTelephone('');
   };

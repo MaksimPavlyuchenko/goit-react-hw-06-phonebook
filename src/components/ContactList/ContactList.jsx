@@ -7,41 +7,36 @@ import { List, ListItem, Button } from './ContactList.styled';
 
 const ContactList = () => {
   const contacts = useSelector(getContacts);
-
-  const filterValue = useSelector(getFilter);
-
+  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
-  const filteredNames = () => {
-    const filterLower = filterValue.toLowerCase().trim();
-
-    if (contacts.length > 0) {
-      const nameValue = contacts.filter(({ name }) => {
-        return name.toLowerCase().includes(filterLower);
+  const filteredName = () => {
+    const filterLower = filter.toLowerCase();
+    if (contacts) {
+      const filteredName = contacts.filter(({ name }) => {
+        return name.toLowerCase().trim().includes(filterLower);
       });
-
-      return nameValue;
+      return filteredName;
     }
   };
 
   return (
     <>
       <List>
-        {contacts.length > 0 &&
-          filteredNames().map(({ name, id, telephone }) => {
-            return (
-              <ListItem key={id}>
-                {name}: {telephone}{' '}
-                <Button
-                  type="button"
-                  id={id}
-                  onClick={() => dispatch(deleteContact(id))}
-                >
-                  Delete
-                </Button>
-              </ListItem>
-            );
-          })}
+        {filteredName().map(({ name, id, telephone }) => {
+          return (
+            <ListItem key={id}>
+              {name}: {telephone}{' '}
+              <Button
+                type="button"
+                id={id}
+                onClick={() => dispatch(deleteContact(id))}
+              >
+                Delete
+              </Button>
+            </ListItem>
+          );
+        })}
       </List>
     </>
   );
