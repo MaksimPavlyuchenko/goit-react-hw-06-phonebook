@@ -13,12 +13,13 @@ const ContactList = () => {
   const dispatch = useDispatch();
 
   const filteredName = () => {
-    const filterLower = filterName.toLowerCase();
-    console.log(filterLower);
+    const filterLower = filterName.toLowerCase().trim();
+
     if (contacts) {
       const filteredName = contacts.filter(({ name }) => {
-        return name.toLowerCase().trim().includes(filterLower);
+        return name.toLowerCase().includes(filterLower);
       });
+
       return filteredName;
     }
   };
