@@ -7,11 +7,14 @@ import { List, ListItem, Button } from './ContactList.styled';
 
 const ContactList = () => {
   const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+
+  const filterName = useSelector(getFilter);
+
   const dispatch = useDispatch();
 
   const filteredName = () => {
-    const filterLower = filter.toLowerCase();
+    const filterLower = filterName.toLowerCase();
+    console.log(filterLower);
     if (contacts) {
       const filteredName = contacts.filter(({ name }) => {
         return name.toLowerCase().trim().includes(filterLower);
