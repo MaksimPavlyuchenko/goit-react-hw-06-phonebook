@@ -15,7 +15,7 @@ const ContactList = () => {
   const filteredNames = () => {
     const filterLower = filterValue.toLowerCase().trim();
 
-    if (contacts) {
+    if (contacts.length > 0) {
       const nameValue = contacts.filter(({ name }) => {
         return name.toLowerCase().includes(filterLower);
       });
@@ -27,20 +27,21 @@ const ContactList = () => {
   return (
     <>
       <List>
-        {filteredNames().map(({ name, id, telephone }) => {
-          return (
-            <ListItem key={id}>
-              {name}: {telephone}{' '}
-              <Button
-                type="button"
-                id={id}
-                onClick={() => dispatch(deleteContact(id))}
-              >
-                Delete
-              </Button>
-            </ListItem>
-          );
-        })}
+        {contacts.length > 0 &&
+          filteredNames().map(({ name, id, telephone }) => {
+            return (
+              <ListItem key={id}>
+                {name}: {telephone}{' '}
+                <Button
+                  type="button"
+                  id={id}
+                  onClick={() => dispatch(deleteContact(id))}
+                >
+                  Delete
+                </Button>
+              </ListItem>
+            );
+          })}
       </List>
     </>
   );
